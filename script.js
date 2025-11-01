@@ -5,7 +5,7 @@ const projectData = {
     'p_daw': {
         title: 'Gestor de cursos ',
         summary: 'Plataforma web Full Stack desarrollada en el ciclo DAW. Permite a los usuarios cargar archivos GPX/FIT de rutas, visualizarlas en un mapa y, lo más importante, utiliza un modelo de machine learning (TensorFlow/Keras) entrenado para predecir y clasificar la dureza de las rutas, aportando un valor añadido de análisis de datos.',
-        stack: ['Java', 'Spring Boot', 'Thymeleaf', 'JPA', 'HTML/Bootstrap', 'JavaScript'],
+        skills: ['Java', 'Spring Boot', 'Thymeleaf', 'JPA', 'HTML/Bootstrap', 'JavaScript'],
         challenges: [
 
         ],
@@ -18,7 +18,7 @@ const projectData = {
     'p_dam': {
         title: 'Marvel details',
         summary: 'Aplicación Android nativa enfocada en la gestión de contenidos. Permite a los usuarios explorar, guardar y descargar información sobre vídeos. El proyecto se centró en el ciclo de vida de una App móvil, la persistencia de datos local y la integración con servicios cloud.',
-        stack: ['Java', 'Firebase Authentication', 'Firebase Realtime Database', 'Firebase Storage', 'Biometrics Auth'],
+        skills: ['Java', 'Firebase Authentication', 'Firebase Realtime Database', 'Firebase Storage', 'Biometrics Auth'],
         challenges: [],
         repo: 'https://github.com/Pabloluma/MarvelDetails',
         images: [
@@ -30,7 +30,7 @@ const projectData = {
     'p_java': {
         title: 'Routes Lupion',
         summary: 'Proyecto modular de backend para simular la gestión de un inventario de almacén. Implementado con Spring Boot para aprovechar su robustez y convención. Se centra en la calidad de la API, la seguridad de los endpoints y el manejo de excepciones.',
-        stack: ['Python', 'Django', 'Youtube API', 'HTML/BOOTSTRAP', 'JAVASCRIPT'],
+        skills: ['Python', 'Django', 'Youtube API', 'HTML/BOOTSTRAP', 'JAVASCRIPT'],
         challenges: [
 
         ],
@@ -44,7 +44,7 @@ const projectData = {
     'p_agenda': {
         title: 'Agenda Contactos',
         sumary: '',
-        stack: ['Java', 'Android', 'SQlite'],
+        skills: ['Java', 'Android', 'SQlite'],
         challenges: [],
         repo: 'https://github.com/Pabloluma/AgendaContactos',
         images: [
@@ -54,7 +54,7 @@ const projectData = {
     'p_clientes' : {
         title: 'Gestor de clientes y pedidos',
         sumary: '',
-        stack: ['Java', 'Spring Boot', 'Thymeleaf', 'JPA'],
+        skills: ['Java', 'Spring Boot', 'Thymeleaf', 'JPA'],
         challenges: [],
         repo: 'https://github.com/Pabloluma/cliente_uno_a_muchos_pedido',
         images: [
@@ -67,17 +67,13 @@ const projectData = {
     }
 };
 
-// ----------------------------------------------------------------------
-// 2. Inicialización de la Aplicación (DOM Ready)
-// ----------------------------------------------------------------------
+
 document.addEventListener('DOMContentLoaded', () => {
-    // Inicializa Lucide Icons (si está disponible)
     if (typeof lucide !== 'undefined') {
         lucide.createIcons();
     }
 
     // Inicializa Typed.js para el efecto de escritura
-    // NOTA: Se asume que la librería Typed.js se carga en el HTML
     new Typed('#typed-intro', {
         strings: ['Desarrollador Full Stack', 'Desarrollador Java y Python', 'Desarrollador Android Nativo'],
         typeSpeed: 50,
@@ -91,15 +87,13 @@ document.addEventListener('DOMContentLoaded', () => {
     setupProjectModal();
 });
 
-// ----------------------------------------------------------------------
-// 3. Lógica de Filtrado de Proyectos
-// ----------------------------------------------------------------------
+
 function setupProjectFiltering() {
     const filterButtons = document.querySelectorAll('.filter-btn');
     const projectCards = document.querySelectorAll('.project-card');
 
     const filterProjects = (filter) => {
-        // Actualiza el estilo del botón activo
+
         filterButtons.forEach(btn => {
             const isActive = btn.getAttribute('data-filter') === filter;
             btn.classList.toggle('bg-sky-600', isActive);
@@ -128,7 +122,7 @@ function setupProjectFiltering() {
         });
     });
 
-    // Establece el filtro inicial a 'Todos'
+
     filterProjects('all');
 }
 
@@ -155,7 +149,7 @@ function createCarouselHTML(images, projectId) {
         <button type="button" class="w-3 h-3 rounded-full bg-gray-700 dark:bg-gray-700 hover:bg-gray-500 transition-colors" aria-current="${index === 0 ? 'true' : 'false'}" aria-label="Slide ${index + 1}" data-carousel-slide-to="${index}"></button>
     `).join('');
 
-    // 3. HTML completo del carrusel de Flowbite
+    // Carrusel completo
     return `
         <div id="project-carousel-${projectId}" class="relative w-full" data-carousel="static">
             <div class="relative h-64 md:h-96 overflow-hidden rounded-lg">
@@ -185,7 +179,7 @@ function createCarouselHTML(images, projectId) {
 }
 
 function logAriaCurrentValues() {
-    // Intentamos acceder al contenedor de los indicadores por su ID
+
     const indicatorsContainer = document.getElementById('indicadores');
 
     if (!indicatorsContainer) {
@@ -195,7 +189,7 @@ function logAriaCurrentValues() {
 
     console.log("--- Escaneo de aria-current después de la navegación ---");
 
-    // Seleccionamos todos los botones dentro del contenedor
+
     const indicatorButtons = indicatorsContainer.querySelectorAll('button');
 
     if (indicatorButtons.length === 0) {
@@ -203,7 +197,7 @@ function logAriaCurrentValues() {
         return;
     }
 
-    // Iteramos y registramos el valor
+
     indicatorButtons.forEach((boton, index) => {
         const ariaCurrent = boton.getAttribute('aria-current');
         boton.className = '';
@@ -216,21 +210,18 @@ function logAriaCurrentValues() {
     console.log("---------------------------------------------------------");
 }
 
-// ----------------------------------------------------------------------
-// 5. Lógica del Modal de Proyectos
-// ----------------------------------------------------------------------
+
 function setupProjectModal() {
-    // Referencias CRÍTICAS del DOM
     const modal = document.getElementById('project-modal');
     const closeModalButton = document.getElementById('close-modal');
-    const stackContainer = document.getElementById('modal-stack');
+    const stackContainer = document.getElementById('modal-skills');
     const carouselContainer = document.getElementById('modal-carousel-container');
     const repoLink = document.getElementById('modal-repo-link');
     const demoLink = document.getElementById('modal-demo-link');
 
-    // Función auxiliar para gestionar visibilidad de enlaces
+
     const updateLink = (linkElement, url) => {
-        if (linkElement && url && url !== '#') { // Asegura que linkElement exista y tenga URL válida
+        if (linkElement && url && url !== '#') {
             linkElement.href = url;
             linkElement.classList.remove('hidden');
         } else if (linkElement) {
@@ -238,7 +229,7 @@ function setupProjectModal() {
         }
     };
 
-    // Asignación de Event Listeners a los botones de proyecto
+
     document.querySelectorAll('.btn-project').forEach(button => {
         button.addEventListener('click', () => {
             const projectId = button.getAttribute('data-id');
@@ -246,13 +237,12 @@ function setupProjectModal() {
 
             if (!data) return;
 
-            // Rellenar el Título
+
             document.getElementById('modal-title').textContent = data.title;
 
-            // 1. Stack de Tecnologías
             if (stackContainer) {
                 stackContainer.innerHTML = '';
-                data.stack.forEach(tech => {
+                data.skills.forEach(tech => {
                     const badge = document.createElement('span');
                     badge.className = 'px-3 py-1 bg-sky-100 text-sky-700 rounded-full text-xs font-medium';
                     badge.textContent = tech;
@@ -260,7 +250,7 @@ function setupProjectModal() {
                 });
             }
 
-            // 2. Carrusel de Imágenes
+
             if (carouselContainer) {
                 carouselContainer.innerHTML = createCarouselHTML(data.images, projectId);
                 if (typeof window.initFlowbite === 'function') {
@@ -284,14 +274,14 @@ function setupProjectModal() {
             }
 
 
-            // 3. Links
+
             updateLink(repoLink, data.repo);
-            // NOTA: 'data.demo' no existe en tu objeto, por lo que siempre se ocultará.
+
             updateLink(demoLink, data.demo);
 
 
-            // Mostrar Modal
-            if (modal) { // CRÍTICO: Abre la ventana
+
+            if (modal) {
                 modal.classList.remove('hidden');
                 modal.classList.add('flex');
                 document.body.style.overflow = 'hidden';
@@ -299,7 +289,7 @@ function setupProjectModal() {
         });
     });
 
-    // Controladores de cierre
+
     const hideModal = () => {
         if (modal) {
             modal.classList.add('hidden');
@@ -313,7 +303,7 @@ function setupProjectModal() {
     }
 
     if (modal) {
-        // Cierre al hacer click fuera
+
         modal.addEventListener('click', (e) => {
             if (e.target === modal) {
                 hideModal();
@@ -321,7 +311,7 @@ function setupProjectModal() {
         });
     }
 
-    // Cierre al pulsar ESC
+
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
             hideModal();
